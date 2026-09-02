@@ -63,6 +63,17 @@ app.withTypeProvider<ZodTypeProvider>().route({
   method: "GET",
   url: "/swagger.json",
   schema: {
+    hide: true,
+  },
+  handler: async () => {
+    return app.swagger();
+  },
+});
+
+app.withTypeProvider<ZodTypeProvider>().route({
+  method: "GET",
+  url: "/",
+  schema: {
     description: "Hello World",
     tags: ["Hello World"],
     response: {
