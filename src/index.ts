@@ -8,7 +8,6 @@ import {
   validatorCompiler,
   ZodTypeProvider,
 } from "fastify-type-provider-zod";
-import { z } from "zod";
 
 import { auth } from "./lib/auth.js";
 import { workoutPlanRoutes } from "./routes/workout-plan.js";
@@ -71,25 +70,7 @@ app.withTypeProvider<ZodTypeProvider>().route({
   },
 });
 
-app.withTypeProvider<ZodTypeProvider>().route({
-  method: "GET",
-  url: "/",
-  schema: {
-    description: "Hello world",
-    tags: ["Hello World"],
-    response: {
-      200: z.object({
-        message: z.string(),
-      }),
-    },
-  },
-  handler: () => {
-    return {
-      message: "Hello World",
-    };
-  },
-});
-
+// RESTful
 // routes
 await app.register(workoutPlanRoutes, { prefix: "/workout-plans" });
 
