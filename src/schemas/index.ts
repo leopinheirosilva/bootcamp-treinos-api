@@ -152,3 +152,38 @@ export const UpsertUserTrainDataSchema = z.object({
   age: z.number(),
   bodyFatPercentage: z.number(),
 });
+
+export const ListWorkoutPlansQuerySchema = z.object({
+  active: z
+    .enum(["true", "false"])
+    .transform((v) => v === "true")
+    .optional(),
+});
+
+export const ListWorkoutPlansSchema = z.array(
+  z.object({
+    id: z.uuid(),
+    name: z.string(),
+    isActive: z.boolean(),
+    workoutDays: z.array(
+      z.object({
+        id: z.uuid(),
+        name: z.string(),
+        weekDay: z.enum(WeekDay),
+        isRest: z.boolean(),
+        estimatedDurationInSeconds: z.number(),
+        coverImageUrl: z.url().optional(),
+        exercises: z.array(
+          z.object({
+            id: z.uuid(),
+            order: z.number(),
+            name: z.string(),
+            sets: z.number(),
+            reps: z.number(),
+            restTimeInSeconds: z.number(),
+          }),
+        ),
+      }),
+    ),
+  }),
+);
