@@ -12,6 +12,7 @@ import {
 } from "fastify-type-provider-zod";
 
 import { auth } from "./lib/auth.js";
+import { env } from "./lib/env.js";
 import { aiRoutes } from "./routes/ai.js";
 import { homeRoutes } from "./routes/home.js";
 import { meRoutes } from "./routes/me.js";
@@ -34,8 +35,8 @@ await app.register(fastifySwagger, {
     },
     servers: [
       {
-        description: "Localhost",
-        url: "http://localhost:8080",
+        description: "API Base URL",
+        url: env.API_BASE_URL,
       },
     ],
   },
@@ -43,7 +44,7 @@ await app.register(fastifySwagger, {
 });
 
 await app.register(fastifyCors, {
-  origin: ["http://localhost:3000"],
+  origin: [env.WEB_AP_BASE_URL],
   credentials: true,
 });
 
@@ -124,7 +125,7 @@ app.route({
 
 const start = async () => {
   try {
-    await app.listen({ port: Number(process.env.PORT) || 8080 });
+    await app.listen({ port: env.PORT });
   } catch (err) {
     app.log.error(err);
     process.exit(1);
