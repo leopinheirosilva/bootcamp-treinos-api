@@ -11,7 +11,7 @@ const envSchema = z.object({
   GOOGLE_CLIENT_SECRET: z.string(),
   GOOGLE_GENERATIVE_AI_API_KEY: z.string().default(""),
   OPENAI_API_KEY: z.string().optional().default(""),
-  WEB_AP_BASE_URL: z.url().default("http://localhost:3000"),
+  WEB_APP_BASE_URL: z.url().default("http://localhost:3000"),
   NODE_ENV: z
     .enum(["development", "production", "test"])
     .default("development"),

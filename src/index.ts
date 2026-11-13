@@ -58,7 +58,7 @@ await app.register(fastifySwagger, {
 });
 
 await app.register(fastifyCors, {
-  origin: [env.WEB_AP_BASE_URL],
+  origin: [env.WEB_APP_BASE_URL],
   credentials: true,
 });
 
